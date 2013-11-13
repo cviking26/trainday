@@ -212,4 +212,12 @@ pip-log.txt
 *.mo
 
 #Mr Developer
+
+
 .mr.developer.cfg
+
+#############
+## phpStorm
+#############
+
+.idea/

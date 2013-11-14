@@ -1,0 +1,11 @@
+/***** HEADER *****/
+#header
+{
+	height: 80px;
+	background-color: #DBEAF9;
+	border-radius: 8px;
+	border-color: #AABCCF;
+	position: fixed;
+	top: 0;
+}
+/***** HEADER END *****/

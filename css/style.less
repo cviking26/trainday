@@ -1,0 +1,62 @@
+/***** LESS VAR*****/
+/*Header (H)*/
+@HHeight		: 40px;
+@HBgColor		: #0B79E5;
+@HBorderColor	: #c7e1ff;
+
+
+/*Content (C)*/
+@CELBgColor 	: #ffffff;
+@CELBorderColor : #CCCCCC;
+@CElBorder		: 1px solid @CELBorderColor;
+
+/***** LESS VAR END*****/
+
+
+body > *
+{
+	width: 100%;
+}
+/***** HEADER *****/
+#header
+{
+	height : @HHeight;
+	background-color: @HBgColor;
+	/*position: fixed;
+	top: 0;*/
+	display: table;
+	text-align: center;
+	h1{
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
+/***** HEADER END *****/
+
+/***** CONTENT *****/
+#content
+{
+	position: absolute;
+	top: @HHeight;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	> *{
+		position: relative;
+		transform: translate3d(0,0,0);
+	}
+}
+
+.content-el
+{
+	height : 60px;
+	background-color: @CELBgColor;
+	border-bottom : @CElBorder;
+	border-top: none;
+	&:first-child{
+		border-top: @CElBorder;
+	}
+}
+/***** CONTENT END *****/

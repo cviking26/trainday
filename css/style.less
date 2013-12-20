@@ -16,6 +16,8 @@
 body > *
 {
 	width: 100%;
+	font-family: 'Istok Web', sans-serif;
+	overflow: none;
 }
 /***** HEADER *****/
 #header
@@ -26,9 +28,22 @@ body > *
 	top: 0;*/
 	display: table;
 	text-align: center;
-	h1{
+	> *{
 		display: table-cell;
 		vertical-align: middle;
+	}
+	h1{
+		color: #ffffff;
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.button
+	{
+		-webkit-tap-highlight-color: transparent;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		width: 110px;
 	}
 }
 /***** HEADER END *****/
@@ -41,8 +56,8 @@ body > *
 	right: 0;
 	left: 0;
 	bottom: 0;
-	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
+	transition: all 0.5 ease-in-out;
 	> *{
 		position: relative;
 		transform: translate3d(0,0,0);
@@ -52,11 +67,24 @@ body > *
 .content-el
 {
 	height : 60px;
+	width: 100%;
 	background-color: @CELBgColor;
 	border-bottom : @CElBorder;
 	border-top: none;
+	display: table;
 	&:first-child{
 		border-top: @CElBorder;
 	}
+	h1{
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
 }
 /***** CONTENT END *****/
+
+/***** ANIMATIONS *****/
+
+/***** ANIMATIONS END******/
+
+

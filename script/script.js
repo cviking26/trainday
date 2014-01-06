@@ -6,6 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+// contains function edit
+String.prototype.contains = function(needle){
+	return this.indexOf(needle) != -1; };
+
 // document ready
 $(function(){
 

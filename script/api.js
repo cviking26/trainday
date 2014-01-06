@@ -23,3 +23,16 @@ function getPlanOverview(){
 		}
 	});
 }
+
+function insertValue(){
+	console.log('ERFOLG');
+	/*$.ajax({
+		type: 'POST',
+		url: 'php/data.php',
+		data: {'param' : 'newElement'},
+		dataType: 'json',
+		success: function(data) {
+			console.log('ERFOLG insertValue');
+		}
+	})*/
+}

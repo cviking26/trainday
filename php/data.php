@@ -36,3 +36,11 @@ if($param == 'plan'){
 		echo json_encode($return);
 	}
 }
+
+/*INSERT NewValue*/
+if($param == "newElement"){
+	$query = "SELECT kv.value FROM `key` AS k
+				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
+				WHERE k.value = '" . $param . "'";
+	$mysqli->query( $query);
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="js no-touch overflow ng-scope" ng-app="todo"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <title>Todo App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="index-Dateien/layout.css">
+    <link rel="stylesheet" href="index-Dateien/styles.css">
+    <link rel="stylesheet" href="index-Dateien/animation.css">
+    <link rel="stylesheet" href="index-Dateien/icons.css">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/icons/touch-icon-iphone.png"> 
+    <link rel="apple-touch-icon" sizes="76x76" href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/icons/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/icons/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/icons/touch-icon-ipad-retina.png">
+
+    <!-- iOS Splash Image -->
+    <!-- iPhone -->
+    <link href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/splash/apple-touch-startup-image-320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+    <!-- iPhone (Retina) -->
+    <link href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/splash/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+    <!-- iPad (portrait) -->
+    <link href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/slash/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (orientation: portrait)" rel="apple-touch-startup-image">
+    <!-- iPad (landscape) -->
+    <link href="http://www.digitalwerft.com/talks/mobileweb/demos/final/images/splash/apple-touch-startup-image-1024x748.png" media="(device-width: 768px) and (orientation: landscape)" rel="apple-touch-startup-image">
+</head>
+<body>
+    <div class="container frontwards loading" ng-class="{backwards: backwards, frontwards: !backwards, loading: loading}" ng-init="loading = true">
+        <!-- .header is shown in both list an detail view -->
+        <div class="header" ng-init="showNav = false">
+            <!-- Back button, only shown on detail view -->
+            <a href="#/list"><div class="header-button header-button-left ng-hide" ng-show="view === 'detail'"><span class="icon icon-left-open"></span><div class="header-button-label">Back</div></div></a>
+            <!-- Add task button, only shown on list view -->
+            <a href="#/detail/"><div class="header-button header-button-right" ng-show="view === 'list'"><span class="icon icon-plus"></span><div class="header-button-label">Add task</div></div></a>
+            <!-- Nav button, only shown on list view -->
+            <div class="header-button header-button-left" ng-show="view === 'list'" ng-click="showNav = !showNav"><span class="icon icon-cog"></span><div class="header-button-label">Actions</div></div>
+            
+            <div class="header-title">Todo App</div>
+        </div>
+        <!-- ngView: Contains both .content and .navigation to keep them in the same scope -->
+        <!-- ngView:  --><div ng-view="" class="view ng-scope"><div class="content ng-scope">
+    <div class="view list">
+        <div class="noEntries ng-hide" ng-show="openTasks &lt; 1">
+            You got nothing to do!<br><br>
+
+            <a href="#/detail">Add a task.</a>
+        </div>
+        <div class="todo">
+            <div class="todo-title" ng-show="openTasks.length &gt; 0">
+                <div ng-switch="openTasks.length">
+                    <!-- ngSwitchWhen: 1 -->
+                    <!-- ngSwitchDefault:  --><div class="ng-scope ng-binding" ng-switch-default="">4 open tasks</div>
+                </div>
+            </div>   
+            <!-- ngRepeat: item in openTasks = (store.todos | filter:{checked:false}) track by item.id --><div class="todo-item ng-scope" ng-repeat="item in openTasks = (store.todos | filter:{checked:false}) track by item.id" ng-class="{ 'show-delete': showDelete }" ng-init="showDelete = false" ng-swipe-left="showDelete = true" ng-swipe-right="showDelete = false">
+                <div class="todo-item-checkbox" ng-click="item.checked = !item.checked">
+                    <span class="icon-circle" ng-class="{ 'icon-circle': item.checked == false, 'icon-ok-circled': item.checked }"></span>
+                </div>
+                <a href="#/detail/54c5" class="todo-item-link">
+                    <div class="todo-item-title ng-binding">gh</div>
+                    <div class="todo-item-due ng-binding">2013-11-26</div>
+                </a>
+                <div class="todo-item-delete" ng-click="delete(item.id)">
+                    <span class="icon-cancel"></span>
+                </div>
+            </div><!-- end ngRepeat: item in openTasks = (store.todos | filter:{checked:false}) track by item.id --><div class="todo-item ng-scope" ng-repeat="item in openTasks = (store.todos | filter:{checked:false}) track by item.id" ng-class="{ 'show-delete': showDelete }" ng-init="showDelete = false" ng-swipe-left="showDelete = true" ng-swipe-right="showDelete = false">
+                <div class="todo-item-checkbox" ng-click="item.checked = !item.checked">
+                    <span class="icon-circle" ng-class="{ 'icon-circle': item.checked == false, 'icon-ok-circled': item.checked }"></span>
+                </div>
+                <a href="#/detail/36dc" class="todo-item-link">
+                    <div class="todo-item-title ng-binding">hgmghm</div>
+                    <div class="todo-item-due ng-binding">2013-11-26</div>
+                </a>
+                <div class="todo-item-delete" ng-click="delete(item.id)">
+                    <span class="icon-cancel"></span>
+                </div>
+            </div><!-- end ngRepeat: item in openTasks = (store.todos | filter:{checked:false}) track by item.id --><div class="todo-item ng-scope" ng-repeat="item in openTasks = (store.todos | filter:{checked:false}) track by item.id" ng-class="{ 'show-delete': showDelete }" ng-init="showDelete = false" ng-swipe-left="showDelete = true" ng-swipe-right="showDelete = false">
+                <div class="todo-item-checkbox" ng-click="item.checked = !item.checked">
+                    <span class="icon-circle" ng-class="{ 'icon-circle': item.checked == false, 'icon-ok-circled': item.checked }"></span>
+                </div>
+                <a href="#/detail/427a" class="todo-item-link">
+                    <div class="todo-item-title ng-binding">ghmghmgh</div>
+                    <div class="todo-item-due ng-binding">2013-11-26</div>
+                </a>
+                <div class="todo-item-delete" ng-click="delete(item.id)">
+                    <span class="icon-cancel"></span>
+                </div>
+            </div><!-- end ngRepeat: item in openTasks = (store.todos | filter:{checked:false}) track by item.id --><div class="todo-item ng-scope" ng-repeat="item in openTasks = (store.todos | filter:{checked:false}) track by item.id" ng-class="{ 'show-delete': showDelete }" ng-init="showDelete = false" ng-swipe-left="showDelete = true" ng-swipe-right="showDelete = false">
+                <div class="todo-item-checkbox" ng-click="item.checked = !item.checked">
+                    <span class="icon-circle" ng-class="{ 'icon-circle': item.checked == false, 'icon-ok-circled': item.checked }"></span>
+                </div>
+                <a href="#/detail/766d" class="todo-item-link">
+                    <div class="todo-item-title ng-binding"></div>
+                    <div class="todo-item-due ng-binding">2013-11-27</div>
+                </a>
+                <div class="todo-item-delete" ng-click="delete(item.id)">
+                    <span class="icon-cancel"></span>
+                </div>
+            </div><!-- end ngRepeat: item in openTasks = (store.todos | filter:{checked:false}) track by item.id -->
+
+            <div class="todo-title" ng-show="(store.todos | filter:{checked:true}).length &gt; 0">
+                <div ng-switch="completedTasks.length">
+                    <!-- ngSwitchWhen: 1 --><div class="ng-scope" ng-switch-when="1">1 completed task</div>
+                    <!-- ngSwitchDefault:  -->
+                </div>
+            </div>   
+            <!-- ngRepeat: item in completedTasks = (store.todos | filter:{checked:true}) track by item.id --><div class="todo-item ng-scope" ng-repeat="item in completedTasks = (store.todos | filter:{checked:true}) track by item.id" ng-class="{ 'show-delete': showDelete }" ng-init="showDelete = false" ng-swipe-left="showDelete = true" ng-swipe-right="showDelete = false">
+                <div class="todo-item-checkbox" ng-click="item.checked = !item.checked">
+                    <span class="icon-ok-circled" ng-class="{ 'icon-circle': item.checked == false, 'icon-ok-circled': item.checked }"></span>
+                </div>
+                <a href="#/detail/b88d" class="todo-item-link">
+                    <div class="todo-item-title ng-binding"></div>
+                    <div class="todo-item-due ng-binding">2013-11-26</div>
+                </a>
+                <div class="todo-item-delete" ng-click="delete(item.id)">
+                    <span class="icon-cancel"></span>
+                </div>
+            </div><!-- end ngRepeat: item in completedTasks = (store.todos | filter:{checked:true}) track by item.id -->
+        </div>
+    </div>
+</div>
+<div class="navigation hide ng-scope" ng-class="{open: showNav, hide: !showNav}" ng-init="showNav === false">
+    <ul class="navigation-list">
+        <li class="navigation-list-item">
+            <a class="navigation-list-item-link" ng-click="checkAll()"><span class="icon-ok-circled"></span> Check all</a>
+        </li>
+        <li class="navigation-list-item">
+            <a class="navigation-list-item-link" ng-click="uncheckAll()"><span class="icon-circle"></span> Uncheck all</a>
+        </li>
+        <li class="navigation-list-item">
+            <a class="navigation-list-item-link" ng-click="deleteCompleted()"><span class="icon-cancel"></span> Delete completed</a>
+        </li>
+    </ul>
+</div></div>
+    </div>
+
+    <script type="text/javascript" src="index-Dateien/angular.js"></script>
+    <script type="text/javascript" src="index-Dateien/angular-route.js"></script>
+    <script type="text/javascript" src="index-Dateien/angular-animate.js"></script>    
+    <script type="text/javascript" src="index-Dateien/angular-touch.js"></script>
+    <script type="text/javascript" src="index-Dateien/modernizr-custom.js"></script>
+    <script type="text/javascript" src="index-Dateien/app.js"></script>
+
+</body></html>

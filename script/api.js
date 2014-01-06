@@ -24,15 +24,27 @@ function getPlanOverview(){
 	});
 }
 
-function insertValue(){
-	console.log('ERFOLG');
-	/*$.ajax({
+function insertValue(value, element){
+	$.ajax({
 		type: 'POST',
 		url: 'php/data.php',
-		data: {'param' : 'newElement'},
+		data: {'param' : 'Plan',
+				'value' : value},
 		dataType: 'json',
+
 		success: function(data) {
-			console.log('ERFOLG insertValue');
+			$(element).parent().remove();
+			for(i=0; i < data.length; i++){
+				addElement(data[i]);
+			}
 		}
-	})*/
+	});
 }
+
+$(document).ajaxStart(function() {
+	$("#loader").show();
+});
+
+$(document).ajaxStop(function() {
+	$("#loader").hide();
+});

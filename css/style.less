@@ -72,15 +72,30 @@ body > *
 	border-bottom : @CElBorder;
 	border-top: none;
 	display: table;
+	margin: 0 auto;
 	&:first-child{
 		border-top: @CElBorder;
 	}
-	h1{
+	h1, input{
 		display: table-cell;
 		vertical-align: middle;
 		text-align: center;
 	}
+	input
+	{
+		width: 80%;
+		margin-left: 10%;
+		height: 40px;
+		margin-top: 8px;
+	}
+
 }
+
+/*.content-input-wrap
+{
+	width: 80%;
+	margin: 0 auto;
+}*/
 /***** CONTENT END *****/
 
 /***** ANIMATIONS *****/

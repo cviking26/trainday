@@ -9,9 +9,20 @@
 
 //TODO
 //SQL SICHERHEIT!!!!
-
+//$db['host'],
+//			$db['username'],
+//			$db['password'],
+//			$db['database']
+require_once('Sql.php');
+$sql = new App_Sql(array(
+	'host' => "localhost",
+	'username' => "root",
+	'password' => "isa99#",
+	'database' => "trainday"
+));
 
 $param = $_POST['param'];
+//$param = 'exc';
 
 /* Open a connection */
 $mysqli = new mysqli("localhost", "root", "isa99#", "trainday");
@@ -62,28 +73,36 @@ if($param == "Plan"){
 		printf("INSERT STATEMENT FAILED - INSERT NewValue");
 	}
 }
-
-if($param = "exc"){
+if($param == "exc"){
 	$kvId = $_POST['id'];
-	if ($stmt = $mysqli->prepare("SELECT password FROM tbl_users WHERE name=?")) {
+	$result = $sql  ->select('kv.id, kv.value')
+					->from('keyvalue', 'kv')
+					->innerJoin('attr', 'a', 'kv.id = a.childId')
+					->innerJoin('key', 'k', 'kv.keyId = k.id')
+					->where('a.parentId = '.$kvId)
+					->execute();
+	var_dump($result);
+	echo json_encode($result);
 
-		// Bind a variable to the parameter as a string.
-		$stmt->bind_param("s", $name);
-
-		// Execute the statement.
-		$stmt->execute();
-
-		// Get the variables from the query.
-		$stmt->bind_result($pass);
-
-		// Fetch the data.
-		$stmt->fetch();
-
-		// Display the data.
-		printf("Password for user %s is %s\n", $name, $pass);
-
-		// Close the prepared statement.
-		$stmt->close();
-
-	}
+//	if ($stmt = $mysqli->prepare("SELECT password FROM tbl_users WHERE name=?")) {
+//
+//		// Bind a variable to the parameter as a string.
+//		$stmt->bind_param("s", $name);
+//
+//		// Execute the statement.
+//		$stmt->execute();
+//
+//		// Get the variables from the query.
+//		$stmt->bind_result($pass);
+//
+//		// Fetch the data.
+//		$stmt->fetch();
+//
+//		// Display the data.
+//		printf("Password for user %s is %s\n", $name, $pass);
+//
+//		// Close the prepared statement.
+//		$stmt->close();
+//
+//	}
 }

@@ -19,24 +19,24 @@ $(function(){
 
 
 var trainDay = angular.module('trainDay', []);
-trainDay.controller('PlanDetailCtrl', function($scope, $http){
-
-	$scope.plans = [{
-		name:'marlon',
-		desc:'agslkjahsglsh'}];
-
-//	var_dump(json_decode(file_get_contents('php://input')));
-//	    else
-	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-
-//	$scope.(function(){
-		$http.post('php/data.php', $.param({'param': 'plan'}))
-			.success(function(data, status, headers, config) {
-				$scope.plans = data;
-			})
-			.error(function(data, status, headers, config) {
-				console.log(data);
-				console.log(status);
-			});
-//	});
-});
+//trainDay.controller('PlanDetailCtrl', function($scope, $http){
+//
+//	$scope.plans = [{
+//		name:'marlon',
+//		desc:'agslkjahsglsh'}];
+//
+////	var_dump(json_decode(file_get_contents('php://input')));
+////	    else
+//	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+//
+////	$scope.(function(){
+//		$http.post('php/data.php', $.param({'param': 'plan'}))
+//			.success(function(data, status, headers, config) {
+//				$scope.plans = data;
+//			})
+//			.error(function(data, status, headers, config) {
+//				console.log(data);
+//				console.log(status);
+//			});
+////	});
+//});

@@ -53,9 +53,9 @@ function getElement(element){
 		dataType: 'json',
 
 		success: function(data) {
-			$(element).parent().remove();
+
 			for(i=0; i < data.length; i++){
-				addElement(data[i]);
+				addElement(data[i].value);
 			}
 		}
 	});

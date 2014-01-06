@@ -159,7 +159,7 @@ class App_Sql
 	 */
 	private function join($table, $tableAlias, $on, $join)
 	{
-		$this->joins .= $join. ' ' .$table. ' AS ' .$tableAlias .' ON '. $on .' ';
+		$this->joins .= $join. ' `' .$table. '` AS ' .$tableAlias .' ON '. $on .' ';
 	}
 
 	/**
@@ -277,11 +277,10 @@ class App_Sql
 
 		$queryString    = substr($queryString, 0, -1);
 		$statement      = $this->db->prepare($queryString);
+//		var_dump($queryString);
 		$this->db->set_charset('utf8');
-		App_Debug::dump($queryString);
 		$statement->execute();
 		$return = null;
-//        App_Debug::dump($statement->get_result()->fetch_assoc());
 		if(is_int(strpos($this->action , 'SELECT'))){
 			$result         = $statement->get_result();
 			$returnArr      = array();

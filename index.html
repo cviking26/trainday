@@ -6,7 +6,7 @@
 	}
 ?>
 <!doctype html>
-<html lang="en-US" ng-app>
+<html lang="en-US" ng-app="trainDay">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
@@ -19,7 +19,9 @@
 	<script type="text/javascript" src="script/angular.min.js"></script>
 	<script type="text/javascript" src="script/app.js"></script>
 	<script type="text/javascript" src="script/api.js"></script>
+	<script type="text/javascript" src="script/script.js"></script>
 	<script type="text/javascript" src="script/less-1.5.0.min.js">
+
 		var less = require('less');
 
 		less.render('.class { width: (1 + 1) }', function (e, css) {
@@ -43,7 +45,14 @@
 		<div class="content-el" data-id="1">
 			<h1></h1>
 		</div>
+        <div id="plan-detail" ng-controller="PlanDetailCtrl">
+            <div ng-repeat="blub in plans">
+                <h4>{{blub.name}}</h4>
+                <p>{{blub.desc}}</p>
+            </div>
+        </div>
 	</div>
+
 	<div id="footer">
 
 	</div>

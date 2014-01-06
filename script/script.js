@@ -16,3 +16,44 @@ $(function(){
 
 
 });
+
+
+var trainDay = angular.module('trainDay', []);
+trainDay.controller('PlanDetailCtrl', function($scope){
+	$scope.plans = [{
+		name:'marlon',
+		desc:'agslkjahsglsh'}];
+	var y = [];
+	$scope.$apply(function() {
+//		$http.post('php/data.php', {'param' : 'plan'})
+//		.success(function(data) {
+//			console.log('-----');
+//			console.log(data);
+//			console.log('-----');
+//			for(var i=0; i < data.length; i++){
+//				y.push(data[i]);
+//			}
+//		})
+//		.error(function(data, status, headers, config) {
+//			console.log(data);
+//			console.log(status);
+//		});
+//
+	});
+
+	console.log(y);
+});
+
+function ajax(){
+	/*ajax kram*/
+
+	/*callback.call();*/
+	$.ajax({
+		type: 'POST',
+		url: 'php/data.php',
+		data: {'param' : 'plan'},
+		dataType: 'json',
+		success: function(data) {
+		}
+	});
+}

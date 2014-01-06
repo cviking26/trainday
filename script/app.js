@@ -11,10 +11,17 @@ function addElement(data){
 }
 
 function addNewElement(data){
-	$("#content").append("<div class='content-el' data-id='" + ($(".content-el").last().data("id")+1) +"'><input class='content-input' type='text' name='newElement' onkeypress='return insertValue()'></div>");
+	$("#content").append("<div class='content-el' data-id='" + ($(".content-el").last().data("id")+1) +"'><input class='content-input' type='text' name='newElement'></div>");
 }
 
 /*ready function*/
 $(function(){
 	getPlanOverview();
+
+	/*live*/
+	$("body").on("keypress", ".content-input", function(e) {
+		if(e.keyCode==13){
+			insertValue(this.value, this);
+		}
+	})
 });

@@ -26,7 +26,7 @@ if($param == 'plan'){
 	$query = "SELECT kv.value FROM `key` AS k
 				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
 				WHERE k.value = '" . $param . "'";
-	if ($result = $mysqli->query( $query)) {
+	if ($result = $mysqli->query($query)) {
 
 		$return = array();
 		$datas = $result->fetch_all();
@@ -38,9 +38,28 @@ if($param == 'plan'){
 }
 
 /*INSERT NewValue*/
-if($param == "newElement"){
-	$query = "SELECT kv.value FROM `key` AS k
-				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
-				WHERE k.value = '" . $param . "'";
-	$mysqli->query( $query);
+if($param == "Plan"){
+	/*auslesen der Aktuellen ID von "PLAN"*/
+	$query = "SELECT id FROM `key` WHERE value = '" . $param . "'";
+	if ($result = $mysqli->query($query)) {
+		$data = $result->fetch_row();
+		$keyId = $data[0];
+	} else {
+		printf("SELECT STATEMENT FAILED - INSERT NewValue");
+	}
+
+	/*Aktuellen Input Wert auslesen*/
+	$value = $_POST['value'];
+
+	/*INSERT in entsprechende Kategorie*/
+	$query = "INSERT INTO keyvalue (`keyId`, `value`) VALUES ('" . $keyId . "', '" . $value . "')";
+
+	/*Überprüfen, ob INSERT Erfolgreich war ($check = true) sonst printf*/
+	if($check = $mysqli->query($query)){
+		$return = array();
+		$return[]  = $value;
+		echo json_encode($return);
+	} else {
+		printf("INSERT STATEMENT FAILED - INSERT NewValue");
+	}
 }

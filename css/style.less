@@ -101,7 +101,16 @@ body > *
 /***** CONTENT END *****/
 
 /***** ANIMATIONS *****/
-
+.swipeAway{
+	transform: translate(-100%,0);
+	-webkit-transform: translate(-100%,0); /** Safari & Chrome **/
+	-o-transform: translate(-100%,0); /** Opera **/
+	-moz-transform: translate(-100%,0); /** Firefox **/
+	transition: all 1s ease-in-out;
+	-webkit-transition: all 1s ease-in-out; /** Chrome & Safari **/
+	-moz-transition: all 1s ease-in-out; /** Firefox **/
+	-o-transition: all 1s ease-in-out; /** Opera **/
+}
 /***** ANIMATIONS END******/
 
 

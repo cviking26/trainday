@@ -6,8 +6,9 @@
 //});
 
 /*Adding an new Content-Element, data-id is increasing by 1*/
-function addElement(data){
-	$("#content").append("<div class='content-el' data-id='" + ($(".content-el").last().data("id")+1) +"' onclick='swipe(this)'><h1>" + data + "</h1></div>");
+function addElement(id, value){
+//	$("#content").append("<div class='content-el' data-id='" + ($(".content-el").last().data("id")+1) +"' onclick='swipe(this)'><h1>" + data + "</h1></div>");
+	$("#content").append("<div class='content-el' data-id='"+ id +"' onclick='swipe(this)'><h1>" + value + "</h1></div>");
 }
 
 function addNewElement(data){
@@ -16,9 +17,10 @@ function addNewElement(data){
 
 
 function swipe(element){
-	var moep = 	$(element).data('id');
-	console.log(moep);
+	$('.content-el').find('h1').addClass('swipeAway');
+	getElement(element);
 }
+
 
 /*ready function*/
 $(function(){

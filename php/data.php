@@ -23,15 +23,14 @@ if ($mysqli->connect_error) {
 }
 
 if($param == 'plan'){
-	$query = "SELECT kv.value FROM `key` AS k
+	$query = "SELECT kv.id, kv.value FROM `key` AS k
 				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
 				WHERE k.value = '" . $param . "'";
 	if ($result = $mysqli->query($query)) {
-
 		$return = array();
 		$datas = $result->fetch_all();
 		foreach($datas as $data){
-			$return[] = $data[0];
+			$return[] = array('id'=> $data[0], 'name'=> $data[1]);
 		}
 		echo json_encode($return);
 	}
@@ -61,5 +60,30 @@ if($param == "Plan"){
 		echo json_encode($return);
 	} else {
 		printf("INSERT STATEMENT FAILED - INSERT NewValue");
+	}
+}
+
+if($param = "exc"){
+	$kvId = $_POST['id'];
+	if ($stmt = $mysqli->prepare("SELECT password FROM tbl_users WHERE name=?")) {
+
+		// Bind a variable to the parameter as a string.
+		$stmt->bind_param("s", $name);
+
+		// Execute the statement.
+		$stmt->execute();
+
+		// Get the variables from the query.
+		$stmt->bind_result($pass);
+
+		// Fetch the data.
+		$stmt->fetch();
+
+		// Display the data.
+		printf("Password for user %s is %s\n", $name, $pass);
+
+		// Close the prepared statement.
+		$stmt->close();
+
 	}
 }

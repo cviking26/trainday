@@ -17,8 +17,10 @@ function getPlanOverview(){
 		data: {'param' : 'plan'},
 		dataType: 'json',
 		success: function(data) {
+			console.log(data);
 			for(i=0; i < data.length; i++){
-				addElement(data[i]);
+				addElement(data[i].id, data[i].name);
+
 			}
 		}
 	});
@@ -30,6 +32,24 @@ function insertValue(value, element){
 		url: 'php/data.php',
 		data: {'param' : 'Plan',
 				'value' : value},
+		dataType: 'json',
+
+		success: function(data) {
+			$(element).parent().remove();
+			for(i=0; i < data.length; i++){
+				addElement(data[i]);
+			}
+		}
+	});
+}
+
+function getElement(element){
+	var id = $(element).data('id');
+	$.ajax({
+		type: 'POST',
+		url: 'php/data.php',
+		data: {'param' : 'exc',
+			'id' : id},
 		dataType: 'json',
 
 		success: function(data) {

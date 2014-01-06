@@ -20,26 +20,23 @@ $(function(){
 
 var trainDay = angular.module('trainDay', []);
 trainDay.controller('PlanDetailCtrl', function($scope, $http){
+
 	$scope.plans = [{
 		name:'marlon',
 		desc:'agslkjahsglsh'}];
-	var y = [];
-//	$scope.$apply(function() {
-		$http.post('php/data.php', {param : 'plan'})
-		.success(function(data) {
-			console.log('-----');
-			console.log(data);
-			console.log('-----');
-			for(var i=0; i < data.length; i++){
-				y.push(data[i]);
-			}
-		})
-		.error(function(data, status, headers, config) {
-			console.log(data);
-			console.log(status);
-		});
-//
-//	});
 
-	console.log(y);
+//	var_dump(json_decode(file_get_contents('php://input')));
+//	    else
+	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+
+//	$scope.(function(){
+		$http.post('php/data.php', $.param({'param': 'plan'}))
+			.success(function(data, status, headers, config) {
+				$scope.plans = data;
+			})
+			.error(function(data, status, headers, config) {
+				console.log(data);
+				console.log(status);
+			});
+//	});
 });

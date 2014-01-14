@@ -84,6 +84,7 @@ if($param == "exc"){
 					->execute();
 	var_dump($result);
 	echo json_encode($result);
+	// blabla
 
 //	if ($stmt = $mysqli->prepare("SELECT password FROM tbl_users WHERE name=?")) {
 //

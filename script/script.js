@@ -129,7 +129,7 @@ trainDay.factory('planFactory', function($rootScope, $http, requestService){
 		},
 		_newPlanIsSaved : function() {
 			this.newPlan = false;
-			this.updatePlanStatus();
+			this._updatePlanStatus();
 		},
 
 		// public Attributes
@@ -223,7 +223,7 @@ trainDay.service('pageService', function($rootScope)
 /**
  * Service für Aufrufe, die an den Server oder an dem LocalStorage gehen
  */
-trainDay.service('requestService', function($http)
+trainDay.service('requestService', function($http, $rootScope)
 {
 	this.localStorageName = 'TrainDayStorage';
 
@@ -233,10 +233,12 @@ trainDay.service('requestService', function($http)
 
 	/* Ajax Aufrufe */
 	this.doAngularAjax = function(uri, params, callback) {
+		$rootScope.loading = true;
 		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 		$http.post     (uri, $.param(params))
 			 .success  (function(data) {
 				    callback(data);
+			$rootScope.loading = false;
 			 });
 	};
 	this.dojQueryAjax  = function(uri, params, callback) {

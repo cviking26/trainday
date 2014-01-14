@@ -121,6 +121,19 @@ body > *
 	width: 80%;
 	margin: 0 auto;
 }*/
+
+#loading
+{
+	@loadingSize	: 100px;
+	height: @loadingSize;
+	width: @loadingSize;
+	position: fixed;
+	/*TODO Rechnung fixen*/
+	@calco = calc(50% - 80px);
+	top: @calco;
+	/*top: 50%;
+	margin-top: -(@loadingSize/2);*/
+}
 /***** CONTENT END *****/
 
 /***** Plan Detail *****/

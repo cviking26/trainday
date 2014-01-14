@@ -1,10 +1,3 @@
-<?php
-	$connection = mysql_connect("localhost", "isaadmin", "test123");
-	if(!$connection)
-	{
-	exit("Verbindungsfehler: ".mysqli_connect_error());
-	}
-?>
 <!doctype html>
 <html lang="en-US" ng-app="trainDay">
 <head>
@@ -43,16 +36,16 @@
 		</div>
 	</div>
 	<div id="content" data-attr="plan">
-		<!--<div data-id="0" id="loader" class="content-el" style="">-->
-			<!--<h1><img src="img/loading.gif" alt=""/></h1>-->
-		<!--</div>-->
+		<div data-id="0" ng-show="loading" id="loading" style="">
+			<h1><img src="img/loading.gif" alt=""/></h1>
+		</div>
 
         <div ng-show="active" ng-controller="PlansOverviewCtrl">
-            <div class="content-el" data-id="" ng-show="newPlan">
-                <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
-            </div>
             <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">
                 <h1 ng-bind="plan.name"></h1>
+            </div>
+            <div class="content-el" data-id="" ng-show="newPlan">
+                <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
             </div>
         </div>
 

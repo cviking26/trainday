@@ -53,34 +53,9 @@ function getElement(element){
 		dataType: 'json',
 
 		success: function(data) {
-
 			for(i=0; i < data.length; i++){
 				addElement(data[i].value);
 			}
 		}
 	});
 }
-
-$(document).ajaxStart(function() {
-	$("#loader").show();
-});
-
-$(document).ajaxStop(function() {
-	$("#loader").hide();
-});
-
-function doAjax(requestParams, callback, url){
-	if(typeof(requestParams)==='undefined') requestParams = {};
-	if(typeof(requestParams)==='function')  callback = requestParams;
-	if(typeof(callback)==='undefined')      requestParams = (function(){});
-	if(typeof(url)==='undefined')           url = 'php/data.php';
-	$.ajax({
-		type    : 'POST',
-		url     : 'php/data.php',
-		data    : requestParams,
-		dataType: 'json',
-		success: function(data) {
-			callback(data);
-		}
-	});
-};

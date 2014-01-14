@@ -24,12 +24,12 @@ function swipe(element){
 
 /*ready function*/
 $(function(){
-	getPlanOverview();
+//	getPlanOverview();
 
 	/*live*/
-	$("body").on("keypress", ".content-input", function(e) {
-		if(e.keyCode==13){
-			insertValue(this.value, this);
-		}
-	})
+//	$("body").on("keypress", ".content-input", function(e) {
+//		if(e.keyCode==13){
+//			insertValue(this.value, this);
+//		}
+//	})
 });

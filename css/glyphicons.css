@@ -3,12 +3,16 @@
 	font-family: 'Glyphicons Halflings';
 	src: url('../fonts/glyphicons-halflings-regular.eot');
 	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
-
+}
+@font-face {
 	font-family: 'Handschrift';
 	src: url('../fonts/handschrift.ttf') format('truetype');
 }
 
+
 .glyphicon {
+	cursor: pointer;
+	color: #FFFFFF;
 	position: relative;
 	top: 1px;
 	display: inline-block;

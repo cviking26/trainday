@@ -17,7 +17,7 @@ require_once('Sql.php');
 $sql = new App_Sql(array(
 	'host' => "localhost",
 	'username' => "root",
-	'password' => "isa99#",
+	'password' => "",
 	'database' => "trainday"
 ));
 
@@ -25,7 +25,7 @@ $param = $_POST['param'];
 //$param = 'exc';
 
 /* Open a connection */
-$mysqli = new mysqli("localhost", "root", "isa99#", "trainday");
+$mysqli = new mysqli("localhost", "root", "", "trainday");
 
 /* check connection */
 if ($mysqli->connect_error) {
@@ -66,9 +66,10 @@ if($param == "Plan"){
 
 	/*Überprüfen, ob INSERT Erfolgreich war ($check = true) sonst printf*/
 	if($check = $mysqli->query($query)){
-		$return = array();
-		$return[]  = $value;
-		echo json_encode($return);
+
+//		$return = array();
+//		$return[]  = $value;
+		echo json_encode(array('id' =>$mysqli->insert_id, 'value'=>$value));
 	} else {
 		printf("INSERT STATEMENT FAILED - INSERT NewValue");
 	}

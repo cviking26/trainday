@@ -109,7 +109,6 @@ class App_Sql
 
 	/**
 	 * @param array $db_info_arr  db connection info
-	 * @throws exception  the mysql Error
 	 */
 	public function __construct($db_info_arr = null)
 	{
@@ -123,8 +122,6 @@ class App_Sql
 			$db['password'],
 			$db['database']
 		);
-		if($this->db->connect_error)
-			throw new App_Exception('Error: '.$this->db->connect_error, 3333);
 	}
 
 
@@ -137,12 +134,12 @@ class App_Sql
 	public function from($table, $tableAlias = null)
 	{
 		if(strpos($this->action , 'SELECT') !== FALSE){
-			$string = 'FROM '.$table;
+			$string = 'FROM `'. $table .'`';
 			if($tableAlias)
 				$string .= ' AS '.$tableAlias;
 			$this->table = $string;
 		} else {
-			$this->table = $table;
+			$this->table = '`'. $table .'`';
 		}
 		return $this;
 	}
@@ -258,7 +255,7 @@ class App_Sql
 
 
 
-	public function execute()
+	public function execute($dump = null)
 	{
 		$queryString    = $this->action.' ';
 		$queryString   .= $this->table.' ';
@@ -277,8 +274,9 @@ class App_Sql
 
 		$queryString    = substr($queryString, 0, -1);
 		$statement      = $this->db->prepare($queryString);
-//		var_dump($queryString);
 		$this->db->set_charset('utf8');
+		if($dump)
+			var_dump($queryString);
 		$statement->execute();
 		$return = null;
 		if(is_int(strpos($this->action , 'SELECT'))){

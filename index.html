@@ -25,32 +25,47 @@
 		var less = require('less');
 
 		less.render('.class { width: (1 + 1) }', function (e, css) {
-			console.log(css);
+//			console.log(css);
 		});
 	</script>
 
 	<title>TrainDay</title>
 </head>
 <body>
-	<div id="header">
-		<div class="button">
-			<img src="img/arrow-left.png" alt=""/>
+	<div id="header" ng-controller="Navi">
+		<div class="button" ng-click="back()">
+			<span ng-show="historyIsAvailable" class="glyphicon glyphicon-chevron-left"></span>
 		</div>
-		<h1>Header</h1>
-		<div class="button" onclick="addNewElement()">
-			<img src="img/add.png" alt=""/>
+		<h1>{{ headerTitle || 'Header'}}</h1>
+		<!--<div class="button" onclick="addNewElement()">-->
+		<div class="button" ng-click="add()">
+            <span class="glyphicon glyphicon-plus"></span>
 		</div>
 	</div>
 	<div id="content" data-attr="plan">
-		<div data-id="0" id="loader" class="content-el" style="">
-			<h1><img src="img/loading.gif" alt=""/></h1>
-		</div>
-        <!--<div id="plan-detail" ng-controller="PlanDetailCtrl">-->
-            <!--<div ng-repeat="blub in plans">-->
-                <!--<h4>{{blub}}</h4>-->
-            <!--</div>-->
+		<!--<div data-id="0" id="loader" class="content-el" style="">-->
+			<!--<h1><img src="img/loading.gif" alt=""/></h1>-->
+		<!--</div>-->
+
+        <div ng-show="active" ng-controller="PlansOverviewCtrl">
+            <div class="content-el" data-id="" ng-show="newPlan">
+                <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
+            </div>
+            <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">
+                <h1 ng-bind="plan.name"></h1>
+            </div>
+        </div>
+
+        <div id="plan-detail" ng-show="active" ng-controller="PlanDetailCtrl">
+            <div ng-bind-html="plan.desc | allowHTML" class="description">
+                <!--{{plan.desc}}-->
+            </div>
+        </div>
+
+        <!--<div class="content-el" data-id="" ng-show="{{newPlan}}">-->
+            <!--<input class="content-input" type="text" name="newElement">-->
         <!--</div>-->
-	</div>
+    </div>
 
 	<div id="footer">
 

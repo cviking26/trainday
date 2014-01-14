@@ -1,0 +1,162 @@
+/***** LESS VAR*****/
+/*Header (H)*/
+/*Content (C)*/
+/***** LESS VAR END*****/
+body > * {
+  width: 100%;
+  font-family: 'Istok Web', sans-serif;
+  overflow: none;
+}
+/***** HEADER *****/
+#header {
+  height: 40px;
+  background-color: #0b79e5;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  display: table;
+  text-align: center;
+  -webkit-transform: translateZ(9);
+  -moz-transform: translateZ(9);
+  -ms-transform: translateZ(9);
+  -o-transform: translateZ(9);
+  transform: translateZ(9);
+}
+#header > * {
+  display: table-cell;
+  vertical-align: middle;
+}
+#header h1 {
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: bold;
+}
+#header .button {
+  -webkit-tap-highlight-color: transparent;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  width: 110px;
+  font-size: 20px;
+}
+/***** HEADER END *****/
+/***** CONTENT *****/
+#content {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transition: all 0.5 ease-in-out;
+  z-index: 1;
+}
+#content > * {
+  position: relative;
+  transform: translate3d(0, 0, 0);
+}
+.content-el {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  border-top: none;
+  display: table;
+  margin: 0 auto;
+}
+.content-el:first-child {
+  border-top: 1px solid #cccccc;
+}
+.content-el h1,
+.content-el input {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.content-el input {
+  width: 80%;
+  margin-left: 10%;
+  height: 25px;
+  margin-top: 8px;
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #555555;
+  display: block;
+  font-size: 14px;
+  line-height: 1.42857;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  vertical-align: middle;
+}
+.content-el input:focus {
+  border-color: #66AFE9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+  outline: 0 none;
+}
+/*.content-input-wrap
+{
+	width: 80%;
+	margin: 0 auto;
+}*/
+/***** CONTENT END *****/
+/***** Plan Detail *****/
+#plan-detail .description {
+  background-image: url('../img/notice-block-bg.jpg');
+  background-size: 500px auto;
+  font-family: Handschrift;
+  font-size: 26px;
+  padding: 22px 10px;
+}
+/***** Plan Detail END *****/
+/***** ANIMATIONS *****/
+.swipeAway {
+  transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
+  /** Safari & Chrome **/
+  -o-transform: translate(-100%, 0);
+  /** Opera **/
+  -moz-transform: translate(-100%, 0);
+  /** Firefox **/
+  transition: all 1s ease-in-out;
+  -webkit-transition: all 1s ease-in-out;
+  /** Chrome & Safari **/
+  -moz-transition: all 1s ease-in-out;
+  /** Firefox **/
+  -o-transition: all 1s ease-in-out;
+  /** Opera **/
+}
+/***** ANIMATIONS END******/
+.blub {
+  height: 16px;
+}
+.content-el {
+  height: 60px;
+  -webkit-transition-property: height;
+  -webkit-transition-duration: 2s;
+  -webkit-transition-timing-function: linear;
+  -webkit-transition-delay: 0s;
+  -moz-transition-property: height;
+  -moz-transition-duration: 2s;
+  -moz-transition-timing-function: linear;
+  -moz-transition-delay: 0s;
+  -ms-transition-property: height;
+  -ms-transition-duration: 2s;
+  -ms-transition-timing-function: linear;
+  -ms-transition-delay: 0s;
+  -o-transition-property: height;
+  -o-transition-duration: 2s;
+  -o-transition-timing-function: linear;
+  -o-transition-delay: 0s;
+  transition-property: height;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+.content-el.last-true {
+  height: 60px;
+  animation: marlonsAnim ease-in-out 2s 1 linear;
+}

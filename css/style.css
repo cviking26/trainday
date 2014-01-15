@@ -102,13 +102,22 @@ body > * {
 	width: 80%;
 	margin: 0 auto;
 }*/
+#loading {
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  /*TODO Rechnung fixen*/
+  top: 50%;
+  margin-top: -50px;
+}
 /***** CONTENT END *****/
 /***** Plan Detail *****/
 #plan-detail .description {
   background-image: url('../img/notice-block-bg.jpg');
   background-size: 500px auto;
   font-family: Handschrift;
-  font-size: 26px;
+  font-size: 45px;
+  line-height: 28px;
   padding: 22px 10px;
 }
 /***** Plan Detail END *****/

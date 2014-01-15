@@ -106,7 +106,12 @@ body > * {
   height: 100px;
   width: 100px;
   position: fixed;
-  /*TODO Rechnung fixen*/
+  left: 50%;
+  margin-left: -50px;
+  z-index: 2;
+  background-color: #0B79E5;
+  opacity: 0.83;
+  border-radius: 3px;
   top: 50%;
   margin-top: -50px;
 }

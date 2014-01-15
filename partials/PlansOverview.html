@@ -1,0 +1,8 @@
+<div ng-show="active" ng-controller="PlansOverviewCtrl">
+    <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">
+        <h1 ng-bind="plan.name"></h1>
+    </div>
+    <div class="content-el" data-id="" ng-show="newPlan">
+        <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
+    </div>
+</div>

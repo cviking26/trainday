@@ -2,27 +2,31 @@
 <html lang="en-US" ng-app="trainDay">
 <head>
 	<meta charset="UTF-8">
+	<title>TrainDay</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    <!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/glyphicons.css">
 	<link rel="stylesheet/less" type="text/css" href="css/style.less">
 	<link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
 
-    <script type="text/javascript" src="script/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="script/angular.min.js"></script>
-	<script type="text/javascript" src="script/app.js"></script>
-	<script type="text/javascript" src="script/api.js"></script>
-	<script type="text/javascript" src="script/script.js"></script>
-	<script type="text/javascript" src="script/less-1.5.0.min.js">
-
+    <!-- Libs -->
+    <script type="text/javascript" src="lib/jquery/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="lib/less/less-1.5.0.min.js">
 		var less = require('less');
-
-		less.render('.class { width: (1 + 1) }', function (e, css) {
-//			console.log(css);
-		});
+		less.render('.class { width: (1 + 1) }', function (e, css) { /*console.log(css);*/ });
 	</script>
 
-	<title>TrainDay</title>
+    <!-- Angular Application -->
+	<!--<script type="text/javascript" src="js/script.js"></script>-->
+	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/directives.js"></script>
+	<script type="text/javascript" src="js/filters.js"></script>
+	<script type="text/javascript" src="js/services.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+
 </head>
 <body>
 	<div id="header" ng-controller="Navi">
@@ -39,6 +43,7 @@
 		<div data-id="0" ng-show="loading" id="loading" style="">
 			<h1><img src="img/loading.gif" alt=""/></h1>
 		</div>
+
 
         <div ng-show="active" ng-controller="PlansOverviewCtrl">
             <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">

@@ -73,7 +73,29 @@ angular.module('trainDay.controllers', [])
 		});
 	})
 
-	.controller('PlanDetailCtrl', function($scope, pageService, $rootScope) {
+	.controller('PlanDetailCtrl', function($scope, pageService, $rootScope, requestService) {
+		var pageName    = 'PlanDetail';
+		$scope.active   = false;
+		$scope.$on('pageChange', function() {
+			var curPage = pageService.getCurrentPage();
+			if(curPage == pageName){
+				$scope.active = true;
+				/* momentaner plan */
+				$scope.plan   = $rootScope.focusedPlan;
+
+				requestService.doAngularAjax('php/data.php', {'param': 'planDetail', 'planId' : $scope.plan.id }, function(data) {
+					$scope.exercises = data;
+				});
+				$scope.plan.desc = 'Das ist eine Beschreibung zu einem ' +
+					'Plan mit der id: "<b>'+ $scope.plan.id +'</b>" !!<br />'+
+					'Lorem Ipsume dolor<br />';
+				console.log($scope.plan);
+			} else
+				$scope.active = false;
+		})
+	})
+
+	.controller('ExerciseCtrl', function($scope, pageService, $rootScope) {
 		var pageName    = 'PlanDetail';
 		$scope.active   = false;
 		$scope.$on('pageChange', function() {

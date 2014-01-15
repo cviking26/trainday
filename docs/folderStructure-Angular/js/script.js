@@ -40,7 +40,7 @@ trainDay.controller('Navi', function($scope, planFactory, pageService, $rootScop
 			pageService.backInHistory();
 	};
 	$scope.add  = function() {
-		console.log();
+//		$("#content").animate({ scrollTop: $('#content').height() }, "slow");
 		if(pageService.getCurrentPage() == 'PlansOverview')
 			planFactory.addNewPlan();
 		else if(pageService.getCurrentPage() == 'PlanDetail')

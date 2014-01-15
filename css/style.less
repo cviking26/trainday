@@ -136,8 +136,12 @@ body > *
 	background-color: #0B79E5;
 	opacity: 0.83;
 	border-radius: 3px;
-	top: 50%;
-	margin-top: -(@loadingSize/2);
+	img
+	{
+		@imagesize : 34px;
+		margin-top: (@loadingSize/2 - @imagesize/2);
+		margin-left: (@loadingSize/2 - @imagesize/2);
+	}
 }
 /***** CONTENT END *****/
 

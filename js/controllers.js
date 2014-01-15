@@ -4,7 +4,7 @@
 
 angular.module('trainDay.controllers', [])
 
-	.controller('Navi', function($scope, planFactory, pageService){
+	.controller('Navi', function($scope, planFactory, pageService, requestService){
 		/* Attributes */
 		$scope.headerTitle          = pageService.getCurrentPageTitle();
 		$scope.historyIsAvailable   = false;

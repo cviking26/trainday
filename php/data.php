@@ -12,7 +12,7 @@ require_once('Sql.php');
 $sql = new App_Sql(array(
 	'host' => "localhost",
 	'username' => "root",
-	'password' => "isa99#",
+	'password' => "",
 	'database' => "trainday"
 ));
 
@@ -29,43 +29,50 @@ $action = $_POST['param'];
 //}
 
 if($action == 'plan') {
-	$query = "SELECT kv.id, kv.value FROM `key` AS k
-				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
-				WHERE k.value = '" . $param . "'";
-	if ($result = $mysqli->query($query)) {
-		$return = array();
-		$datas = $result->fetch_all();
-		foreach($datas as $data){
-			$return[] = array('id'=> $data[0], 'name'=> $data[1]);
-		}
-		echo json_encode($return);
-	}
-} elseif ($action == "Plan") {
+//	$userId = $_POST['userId'];
+	$userId = 1;
+	$plans = $sql->select()
+				->from('plan')
+				->where('userid = '. $userId)
+				->execute();
+	echo json_encode($plans);
+}
+elseif ($action == "Plan") {
 /*INSERT NewValue*/
-	/*auslesen der Aktuellen ID von "PLAN"*/
-	$query = "SELECT id FROM `key` WHERE value = '" . $param . "'";
-	if ($result = $mysqli->query($query)) {
-		$data = $result->fetch_row();
-		$keyId = $data[0];
-	} else {
-		printf("SELECT STATEMENT FAILED - INSERT NewValue");
-	}
-
 	/*Aktuellen Input Wert auslesen*/
 	$value = $_POST['value'];
 
-	/*INSERT in entsprechende Kategorie*/
-	$query = "INSERT INTO keyvalue (`keyId`, `value`) VALUES ('" . $keyId . "', '" . $value . "')";
+	$insertArr  = array(
+		'name'        => $value,
+	);
+	$planId = $sql->insert($insertArr)
+				->into('plan')
+				->execute();
+	echo json_encode($planId);
 
-	/*Überprüfen, ob INSERT Erfolgreich war ($check = true) sonst printf*/
-	if($check = $mysqli->query($query)){
 
-//		$return = array();
-//		$return[]  = $value;
-		echo json_encode(array('id' =>$mysqli->insert_id, 'value'=>$value));
-	} else {
-		printf("INSERT STATEMENT FAILED - INSERT NewValue");
-	}
+//	/*auslesen der Aktuellen ID von "PLAN"*/
+//	$query = "SELECT id FROM `key` WHERE value = '" . $param . "'";
+//	if ($result = $mysqli->query($query)) {
+//		$data = $result->fetch_row();
+//		$keyId = $data[0];
+//	} else {
+//		printf("SELECT STATEMENT FAILED - INSERT NewValue");
+//	}
+//
+//
+//	/*INSERT in entsprechende Kategorie*/
+//	$query = "INSERT INTO keyvalue (`keyId`, `value`) VALUES ('" . $keyId . "', '" . $value . "')";
+//
+//	/*Überprüfen, ob INSERT Erfolgreich war ($check = true) sonst printf*/
+//	if($check = $mysqli->query($query)){
+//
+////		$return = array();
+////		$return[]  = $value;
+//		echo json_encode(array('id' =>$mysqli->insert_id, 'value'=>$value));
+//	} else {
+//		printf("INSERT STATEMENT FAILED - INSERT NewValue");
+//	}
 } elseif ($action == "exc") {
 	$kvId = $_POST['id'];
 	$result = $sql  ->select('kv.id, kv.value')
@@ -88,15 +95,54 @@ if($action == 'plan') {
 //		->execute();
 	// get exercises
 	return true;
+
 } elseif ($action == 'insertSets') {
-	$sets = $_POST['sets'];
+/* INSERT alle gemachten sets */
+	// test
+	$sets = array(
+		array(
+			'replications' => 15,
+			'weight' => 32.5,
+		),
+		array(
+			'replications' => 15,
+			'weight' => 32.5,
+		),
+		array(
+			'replications' => 15,
+			'weight' => 32.5,
+		)
+	);
+	$userId = 1;
+	$exercId = 1;
 
-	$sets[''];
+//	$sets       = $_POST['sets'];
+//	$userId     = $_POST['userId'];
+//	$exercId    = $_POST['exercId'];
+	$setsString = '';
+	foreach($sets as $set){
+		$reps   = $set['replications'];
+		$weight = $set['weight'];
+		$setsString .= $reps. ' - ' .$weight. ' | ';
+	}
+	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35 | '
+	$setsString =  substr($setsString, 0, -3);
+	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35'
 
 
-//	--sets--
-//id      = 3
-//values  = '15 - 30 | 16 - 32.25 | 15 - 35'
+	$setId = $sql->insert(array('values' => $setsString ))
+				 ->into('set')
+				 ->execute(true);
 
 
+	$insertArr  = array(
+		'userId'        => $userId,
+		'exerciseId'    => $exercId,
+		'setId'         => $setId,
+		'date'          => 'NOW()'
+	);
+	$sql->insert($insertArr)
+		->into('user_exerc_sets')
+		->execute(true);
+	return true;
 }

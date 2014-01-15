@@ -144,6 +144,24 @@ class App_Sql
 		return $this;
 	}
 
+	/**
+	 * @param  string
+	 * @param  string
+	 * @return class $this(App_Sql)
+	 */
+	public function into($table, $tableAlias = null)
+	{
+		if(strpos($this->action , 'SELECT') !== FALSE){
+			$string = 'FROM `'. $table .'`';
+			if($tableAlias)
+				$string .= ' AS '.$tableAlias;
+			$this->table = $string;
+		} else {
+			$this->table = '`'. $table .'`';
+		}
+		return $this;
+	}
+
 
 
 	#region Joins
@@ -354,7 +372,11 @@ class App_Sql
 				if($value != null && $value != '')
 				{
 					$columns .= '`'. $column .'`, ';
-					$values .= '\''. $value .'\', ';
+					if($this->isSqlCommand($value)){
+						$values .=  $value .', ';
+					} else {
+						$values .= '\''. $value .'\', ';
+					}
 				}
 			}
 

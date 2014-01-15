@@ -31,7 +31,7 @@ angular.module('trainDay.services', [])
 				requestService.doAngularAjax('php/data.php', {'param': 'Plan', 'value': value}, function(data) {
 					$thatScope.plans.push({
 						id  : data.id,
-						name: data.value
+						name: value
 					});
 					planFactory._newPlanIsSaved();
 				});

@@ -7,12 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-//TODO
-//SQL SICHERHEIT!!!!
-//$db['host'],
-//			$db['username'],
-//			$db['password'],
-//			$db['database']
+
 require_once('Sql.php');
 $sql = new App_Sql(array(
 	'host' => "localhost",
@@ -21,19 +16,19 @@ $sql = new App_Sql(array(
 	'database' => "trainday"
 ));
 
-$param = $_POST['param'];
+$action = $_POST['param'];
 //$param = 'exc';
 
 /* Open a connection */
-$mysqli = new mysqli("localhost", "root", "isa99#", "trainday");
+//$mysqli = new mysqli("localhost", "root", "isa99#", "trainday");
 
 /* check connection */
-if ($mysqli->connect_error) {
-	printf("Connect failed: %s\n", mysqli_connect_error());
-	exit();
-}
+//if ($mysqli->connect_error) {
+//	printf("Connect failed: %s\n", mysqli_connect_error());
+//	exit();
+//}
 
-if($param == 'plan'){
+if($action == 'plan') {
 	$query = "SELECT kv.id, kv.value FROM `key` AS k
 				INNER JOIN `keyvalue` AS kv ON k.id = kv.keyId
 				WHERE k.value = '" . $param . "'";
@@ -45,10 +40,8 @@ if($param == 'plan'){
 		}
 		echo json_encode($return);
 	}
-}
-
+} elseif ($action == "Plan") {
 /*INSERT NewValue*/
-if($param == "Plan"){
 	/*auslesen der Aktuellen ID von "PLAN"*/
 	$query = "SELECT id FROM `key` WHERE value = '" . $param . "'";
 	if ($result = $mysqli->query($query)) {
@@ -73,7 +66,7 @@ if($param == "Plan"){
 	} else {
 		printf("INSERT STATEMENT FAILED - INSERT NewValue");
 	}
-}elseif($param == "exc"){
+} elseif ($action == "exc") {
 	$kvId = $_POST['id'];
 	$result = $sql  ->select('kv.id, kv.value')
 					->from('keyvalue', 'kv')
@@ -83,31 +76,9 @@ if($param == "Plan"){
 					->execute();
 	var_dump($result);
 	echo json_encode($result);
-	// blabla
 
-//	if ($stmt = $mysqli->prepare("SELECT password FROM tbl_users WHERE name=?")) {
-//
-//		// Bind a variable to the parameter as a string.
-//		$stmt->bind_param("s", $name);
-//
-//		// Execute the statement.
-//		$stmt->execute();
-//
-//		// Get the variables from the query.
-//		$stmt->bind_result($pass);
-//
-//		// Fetch the data.
-//		$stmt->fetch();
-//
-//		// Display the data.
-//		printf("Password for user %s is %s\n", $name, $pass);
-//
-//		// Close the prepared statement.
-//		$stmt->close();
-//
-//	}
-}elseif($param == 'planDetail')
-{
+
+} elseif ($action == 'planDetail') {
 //	$planId = $_POST['planId'];
 //	$result = $sql  ->select('kv.id, kv.value')
 //		->from('keyvalue', 'kv')
@@ -117,9 +88,15 @@ if($param == "Plan"){
 //		->execute();
 	// get exercises
 	return true;
+} elseif ($action == 'insertSets') {
+	$sets = $_POST['sets'];
+
+	$sets[''];
+
+
+//	--sets--
+//id      = 3
+//values  = '15 - 30 | 16 - 32.25 | 15 - 35'
+
+
 }
-/*
- *
- *
- *
- * */

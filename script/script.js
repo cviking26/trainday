@@ -20,7 +20,6 @@ $(function(){
 
 
 var trainDay = angular.module('trainDay', []);
-
 //<editor-fold desc="Controlllers">
 
 trainDay.controller('Navi', function($scope, planFactory, pageService, $rootScope){

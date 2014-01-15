@@ -106,14 +106,18 @@ body > * {
   height: 100px;
   width: 100px;
   position: fixed;
+  top: 50%;
   left: 50%;
+  margin-top: -50px;
   margin-left: -50px;
   z-index: 2;
   background-color: #0B79E5;
   opacity: 0.83;
   border-radius: 3px;
-  top: 50%;
-  margin-top: -50px;
+}
+#loading img {
+  margin-top: 33px;
+  margin-left: 33px;
 }
 /***** CONTENT END *****/
 /***** Plan Detail *****/

@@ -238,10 +238,11 @@ trainDay.service('requestService', function($http, $rootScope)
 		$http.post     (uri, $.param(params))
 			 .success  (function(data) {
 				    callback(data);
-			$rootScope.loading = false;
+					$rootScope.loading = false;
 			 });
 	};
 	this.dojQueryAjax  = function(uri, params, callback) {
+		$rootScope.loading = true;
 		$.ajax({
 			type    : 'POST',
 			url     : uri,
@@ -249,6 +250,7 @@ trainDay.service('requestService', function($http, $rootScope)
 			dataType: 'json',
 			success : function(data) {
 				callback(data);
+				$rootScope.loading = false;
 			}
 		});
 	};
@@ -264,7 +266,7 @@ trainDay.service('requestService', function($http, $rootScope)
 trainDay.directive('keyFocus', function() {
 	return {
 		restrict: 'A',
-		// erstellt den event listener für das input feld
+		// erstellt den event listener für das input field
 		link: function(scope, elem, attrs) {
 			elem.bind('keyup', function (e) {
 				if (e.keyCode == 13) {

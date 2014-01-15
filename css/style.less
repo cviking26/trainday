@@ -128,11 +128,14 @@ body > *
 	height: @loadingSize;
 	width: @loadingSize;
 	position: fixed;
-	/*TODO Rechnung fixen*/
-	@calco = calc(50% - 80px);
-	top: @calco;
-	/*top: 50%;
-	margin-top: -(@loadingSize/2);*/
+	top: 50%;
+	left: 50%;
+	margin-top: -(@loadingSize / 2);
+	margin-left: -(@loadingSize / 2);
+	z-index: 2;
+	background-color: #0B79E5;
+	opacity: 0.83;
+	border-radius: 3px;
 }
 /***** CONTENT END *****/
 

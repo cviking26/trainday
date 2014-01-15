@@ -12,6 +12,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
 
     <!-- Libs -->
+    <script type="text/javascript" src="lib/smooth-scroll/smooth-scroll.js"></script>
     <script type="text/javascript" src="lib/jquery/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 	<script type="text/javascript" src="lib/less/less-1.5.0.min.js">
@@ -49,10 +50,11 @@
             <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">
                 <h1 ng-bind="plan.name"></h1>
             </div>
-            <div class="content-el" data-id="" ng-show="newPlan">
+            <div class="content-el" id="new_plan" data-id="" ng-show="newPlan" scrollIf>
                 <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
             </div>
         </div>
+
 
         <div id="plan-detail" ng-show="active" ng-controller="PlanDetailCtrl">
             <div ng-bind-html="plan.desc | allowHTML" class="description">

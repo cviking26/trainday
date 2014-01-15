@@ -18,3 +18,21 @@
   partials/             --> angular view partials (partial html templates)
     partial1.html
     partial2.html
+
+
+
+
+
+
+
+
+--sets--
+id      = 3
+values  = '15 - 30 | 16 - 32.25 | 15 - 35'
+
+
+--user_exerc_sets--
+userid      = 1
+exerciseId  = 4
+setsId      = 5
+date        = '15.01.2014|14:09'

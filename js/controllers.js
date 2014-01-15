@@ -43,6 +43,9 @@ angular.module('trainDay.controllers', [])
 		/* Event listener */
 		$scope.$on('handleNewPlan', function() {
 			$scope.newPlan = planFactory.newPlan;
+//			jQuery('#content').animate({
+//				scrollTop: $("#content").offset().top
+//			}, 2000);
 		});
 		$scope.$on('pageChange', function() {
 			var curPage = pageService.getCurrentPage();

@@ -18,7 +18,6 @@ $(function(){
 
 });
 
-
 /**
  * Angular root application
  */

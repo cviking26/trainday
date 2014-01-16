@@ -39,7 +39,6 @@ if($action == 'getPlansByUserId') {
 }
 elseif ($action == "addNewPlan") {
 /*INSERT NewValue*/
-	/*Aktuellen Input Wert auslesen*/
 	$planName = $_POST['name'];
 	$userId   = $_POST['userId'];
 
@@ -49,7 +48,7 @@ elseif ($action == "addNewPlan") {
 	);
 	$planId = $sql->insert($insertArr)
 				  ->into('plan')
-				  ->execute(true);
+				  ->execute();
 	echo json_encode($planId);
 
 
@@ -87,16 +86,16 @@ elseif ($action == "addNewPlan") {
 	echo json_encode($result);
 
 
-} elseif ($action == 'planDetail') {
-//	$planId = $_POST['planId'];
-//	$result = $sql  ->select('kv.id, kv.value')
-//		->from('keyvalue', 'kv')
-//		->innerJoin('attr', 'a', 'kv.id = a.childId')
-//		->innerJoin('key', 'k', 'kv.keyId = k.id')
-//		->where('a.parentId = '.$kvId)
-//		->execute();
-	// get exercises
-	return true;
+} elseif ($action == 'getExercisesByPlanId') {
+
+	$userId = $_POST['userId'];
+	$planId = $_POST['planId'];
+	$data = $sql->select()
+		->from('plan')
+		->innerJoin('exercise', 'e', 'plan.id = e.planid')
+		->where('plan.id = '. $planId)
+		->execute();
+	echo json_encode($data);
 
 } elseif ($action == 'insertSets') {
 /* INSERT alle gemachten sets */

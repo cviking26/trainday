@@ -117,16 +117,21 @@ angular.module('trainDay.services', [])
 	.service('requestService', function($http, $rootScope)
 	{
 		this.localStorageName = 'TrainDayStorage';
+		this.userId           = 1;
 
 		/* LocalStorage Aufrufe */
 		// TODO: localstorage, +
 
 		this.getPlans = function(callback) {
-			this.doAngularAjax('php/data.php', {'action': 'getPlansByUserId', 'userId' : 1}, callback);
+			this.doAngularAjax('php/data.php', {'action': 'getPlansByUserId', 'userId' : this.userId}, callback);
 		};
 
 		this.saveNewPlan = function(planName, callback) {
-			this.doAngularAjax('php/data.php', {'action': 'addNewPlan', 'name': planName,'userId' : 1}, callback);
+			this.doAngularAjax('php/data.php', {'action': 'addNewPlan', 'name': planName, 'userId' : this.userId}, callback);
+		}
+
+		this.getPlanDetails = function(planId, callback) {
+			this.doAngularAjax('php/data.php', {'action': 'getExercisesByPlanId', 'planId': planId, 'userId' : this.userId}, callback);
 		}
 
 

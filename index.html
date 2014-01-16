@@ -46,9 +46,12 @@
 
 
         <div ng-show="active" ng-controller="PlansOverviewCtrl">
+            <!-- Alle Pläne -->
             <div ng-click="seeDetail(this)" data-id="{{plan.id}}" class="content-el {{plan.later || ''}} last-{{$last}}" ng-repeat="plan in plans">
                 <h1 ng-bind="plan.name"></h1>
             </div>
+
+            <!-- neuer Plan input-feld-->
             <div class="content-el" data-id="" ng-show="newPlan">
                 <input class="content-input" ng-model="newPlanName" type="text" max="20" min="1" key-focus>
             </div>
@@ -57,6 +60,10 @@
         <div id="plan-detail" ng-show="active" ng-controller="PlanDetailCtrl">
             <div ng-bind-html="plan.desc | allowHTML" class="description">
                 <!--{{plan.desc}}-->
+            </div>
+            <div class="content-el" ng-repeat="exercise in plan.exercises">
+                <h1 ng-bind="exercise.name"></h1>
+                <!--<p ng-bind="exercise.desc"></p>-->
             </div>
         </div>
 

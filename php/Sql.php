@@ -352,7 +352,7 @@ class App_Sql
 		$columns            = '';
 		$values             = '';
 		if($valuesArr){
-			foreach($insertArray as $key => $value)
+			foreach($insertArray as $value)
 			{
 				$columns .= '`'. $value .'`, ';
 

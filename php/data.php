@@ -37,17 +37,19 @@ if($action == 'getPlansByUserId') {
 				->execute();
 	echo json_encode($plans);
 }
-elseif ($action == "Plan") {
+elseif ($action == "addNewPlan") {
 /*INSERT NewValue*/
 	/*Aktuellen Input Wert auslesen*/
-	$value = $_POST['value'];
+	$planName = $_POST['name'];
+	$userId   = $_POST['userId'];
 
 	$insertArr  = array(
-		'name'        => $value,
+		'name'        => $planName,
+		'userid'        => $userId,
 	);
 	$planId = $sql->insert($insertArr)
-				->into('plan')
-				->execute();
+				  ->into('plan')
+				  ->execute(true);
 	echo json_encode($planId);
 
 

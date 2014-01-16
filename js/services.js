@@ -28,7 +28,14 @@ angular.module('trainDay.services', [])
 			},
 			addNewPlanToDb : function($thatScope, value) {
 				var planFactory = this;
-				requestService.doAngularAjax('php/data.php', {'param': 'Plan', 'value': value}, function(data) {
+//				requestService.doAngularAjax('php/data.php', {'param': 'Plan', 'value': value}, function(data) {
+//					$thatScope.plans.push({
+//						id  : data,
+//						name: value
+//					});
+//					planFactory._newPlanIsSaved();
+//				});
+				requestService.saveNewPlan(value, function(data) {
 					$thatScope.plans.push({
 						id  : data,
 						name: value
@@ -117,6 +124,10 @@ angular.module('trainDay.services', [])
 		this.getPlans = function(callback) {
 			this.doAngularAjax('php/data.php', {'action': 'getPlansByUserId', 'userId' : 1}, callback);
 		};
+
+		this.saveNewPlan = function(planName, callback) {
+			this.doAngularAjax('php/data.php', {'action': 'addNewPlan', 'name': planName,'userId' : 1}, callback);
+		}
 
 
 

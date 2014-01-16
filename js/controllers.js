@@ -68,8 +68,11 @@ angular.module('trainDay.controllers', [])
 		}
 
 
-		requestService.doAngularAjax('php/data.php', {'param': 'plan'}, function(data) {
-			$scope.plans = data;
+//		requestService.doAngularAjax('php/data.php', {'param': 'plan'}, function(data) {
+//			$scope.plans = data;
+//		});
+		requestService.getPlans(function(plans){
+			$scope.plans = plans;
 		});
 	})
 

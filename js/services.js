@@ -30,7 +30,7 @@ angular.module('trainDay.services', [])
 				var planFactory = this;
 				requestService.doAngularAjax('php/data.php', {'param': 'Plan', 'value': value}, function(data) {
 					$thatScope.plans.push({
-						id  : data.id,
+						id  : data,
 						name: value
 					});
 					planFactory._newPlanIsSaved();
@@ -113,6 +113,11 @@ angular.module('trainDay.services', [])
 
 		/* LocalStorage Aufrufe */
 		// TODO: localstorage, +
+
+		this.getPlans = function(callback) {
+			this.doAngularAjax('php/data.php', {'action': 'getPlansByUserId', 'userId' : 1}, callback);
+		};
+
 
 
 		/* Ajax Aufrufe */

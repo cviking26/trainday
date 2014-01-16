@@ -16,7 +16,8 @@ $sql = new App_Sql(array(
 	'database' => "trainday"
 ));
 
-$action = $_POST['param'];
+$action = $_POST['action'];
+//$action = $_POST['param'];
 //$param = 'exc';
 
 /* Open a connection */
@@ -28,9 +29,8 @@ $action = $_POST['param'];
 //	exit();
 //}
 
-if($action == 'plan') {
-//	$userId = $_POST['userId'];
-	$userId = 1;
+if($action == 'getPlansByUserId') {
+	$userId = $_POST['userId'];
 	$plans = $sql->select()
 				->from('plan')
 				->where('userid = '. $userId)

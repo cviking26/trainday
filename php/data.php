@@ -91,9 +91,8 @@ elseif ($action == "addNewPlan") {
 	$userId = $_POST['userId'];
 	$planId = $_POST['planId'];
 	$data = $sql->select()
-		->from('plan')
-		->innerJoin('exercise', 'e', 'plan.id = e.planid')
-		->where('plan.id = '. $planId)
+		->from('exercise')
+		->where('planid = '. $planId)
 		->execute();
 	echo json_encode($data);
 

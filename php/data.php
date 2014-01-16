@@ -15,30 +15,30 @@ $sql = new App_Sql(array(
 	'password' => "",
 	'database' => "trainday"
 ));
-
+/**
+ * To prevent sql-injection
+ */
+$_POST = array_map('stripslashes', $_POST);
 $action = $_POST['action'];
-//$action = $_POST['param'];
-//$param = 'exc';
+//$action = $_POST['param']
 
-/* Open a connection */
-//$mysqli = new mysqli("localhost", "root", "isa99#", "trainday");
 
-/* check connection */
-//if ($mysqli->connect_error) {
-//	printf("Connect failed: %s\n", mysqli_connect_error());
-//	exit();
-//}
 
-if($action == 'getPlansByUserId') {
+if     ($action == 'getPlansByUserId') {
+
+
 	$userId = $_POST['userId'];
 	$plans = $sql->select()
 				->from('plan')
 				->where('userid = '. $userId)
 				->execute();
 	echo json_encode($plans);
+
+
 }
 elseif ($action == "addNewPlan") {
 /*INSERT NewValue*/
+
 	$planName = $_POST['name'];
 	$userId   = $_POST['userId'];
 
@@ -74,7 +74,10 @@ elseif ($action == "addNewPlan") {
 //	} else {
 //		printf("INSERT STATEMENT FAILED - INSERT NewValue");
 //	}
-} elseif ($action == "exc") {
+}
+elseif ($action == "exc") {
+
+
 	$kvId = $_POST['id'];
 	$result = $sql  ->select('kv.id, kv.value')
 					->from('keyvalue', 'kv')
@@ -86,17 +89,21 @@ elseif ($action == "addNewPlan") {
 	echo json_encode($result);
 
 
-} elseif ($action == 'getExercisesByPlanId') {
+}
+elseif ($action == 'getExercisesByPlanId') {
+
 
 	$userId = $_POST['userId'];
 	$planId = $_POST['planId'];
 	$data = $sql->select()
-		->from('exercise')
-		->where('planid = '. $planId)
-		->execute();
+				->from('exercise')
+				->where('planid = '. $planId)
+				->execute();
 	echo json_encode($data);
 
-} elseif ($action == 'insertSets') {
+
+}
+elseif ($action == 'insertSets') {
 /* INSERT alle gemachten sets */
 	// test
 	$sets = array(
@@ -119,22 +126,17 @@ elseif ($action == "addNewPlan") {
 //	$sets       = $_POST['sets'];
 //	$userId     = $_POST['userId'];
 //	$exercId    = $_POST['exercId'];
-	$setsString = '';
-	foreach($sets as $set){
-		$reps   = $set['replications'];
-		$weight = $set['weight'];
-		$setsString .= $reps. ' - ' .$weight. ' | ';
-	}
-	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35 | '
-	$setsString =  substr($setsString, 0, -3);
-	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35'
+
+	$setString = getStringFromSetsArray($sets);
 
 
+	// insert sets to get the set Id
 	$setId = $sql->insert(array('values' => $setsString ))
 				 ->into('set')
 				 ->execute(true);
 
 
+	// Verbindung des Sets mit der Übung und dem dazugehörigen User
 	$insertArr  = array(
 		'userId'        => $userId,
 		'exerciseId'    => $exercId,
@@ -144,5 +146,54 @@ elseif ($action == "addNewPlan") {
 	$sql->insert($insertArr)
 		->into('user_exerc_sets')
 		->execute(true);
-	return true;
+	// gibt nur die abfrage aus
+
+
+}
+elseif ($action == 'getSetsByExerciseId') {
+
+
+	$exercId = $_POST['exerciseId'];
+
+	// db abfrage
+	$date       = date('Y-m-d H:i:s');
+	$setString  = '15 - 30 | 16 - 32.25 | 15 - 35';
+	$setArr     = getArrayFromSetsString($setString);
+	echo json_encode(array(
+		'date' => $date,
+		'sets' => $setArr
+	));
+
+
+}
+
+
+
+
+/**
+ * Global Functions
+ */
+function getStringFromSetsArray($sets) {
+	$setsString = '';
+	foreach($sets as $set){
+		$reps   = $set['replications'];
+		$weight = $set['weight'];
+		$setsString .= $reps. ' - ' .$weight. ' | ';
+	}
+	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35 | '
+	$setsString =  substr($setsString, 0, -3);
+	//$setsString  = '15 - 30 | 16 - 32.25 | 15 - 35'
+	return $setsString;
+}
+function getArrayFromSetsString($setsString) {
+	$sets = explode(' | ', $setsString);
+	$setsArr = array();
+	foreach($sets as $set){
+		$setSplitted = explode(' - ', $set);
+		$setsArr[] = array(
+			'replications'  => $setSplitted[0],
+			'weight'        => $setSplitted[1]
+		);
+	}
+	return $setsArr;
 }
